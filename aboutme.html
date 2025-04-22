@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+        
+        :root {
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff00aa;
+            --neon-orange: #ff8c42;
+            --neon-blue: #00f3ff;
+            --neon-red: #ff073a;
+            --neon-green: #00ff88;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(188, 19, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 94, 26, 0.1) 0%, transparent 50%);
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        .home-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: var(--darker-bg);
+            color: var(--neon-purple);
+            border: 2px solid var(--neon-purple);
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 10;
+            border-radius: 4px;
+        }
+        
+        .home-btn:hover {
+            color: var(--neon-orange);
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px var(--neon-orange);
+            transform: translateY(-3px);
+        }
+        
+        .containers-wrapper {
+            display: flex;
+            gap: 2rem;
+            width: 80vw;
+            justify-content: center;
+        }
+        
+        .image-container {
+            width: 35vw;
+            height: 60vh;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background-color: var(--darker-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+        }
+        
+        /* First container - Neon Red */
+        .image-container:first-child:hover {
+            transform: scale(1.02);
+            border-color: var(--neon-red);
+            box-shadow: 
+                0 0 20px var(--neon-red),
+                inset 0 0 10px var(--neon-red);
+            background-color: black;
+        }
+        
+        /* Second container - Neon Blue */
+        .image-container:nth-child(2):hover {
+            transform: scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 
+                0 0 20px var(--neon-blue),
+                inset 0 0 10px var(--neon-blue);
+            background-color: black;
+        }
+        
+        .image-container img {
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            opacity: 0.9;
+        }
+        
+        .image-container:hover img {
+            opacity: 0;
+            transform: scale(1);
+        }
+        
+        .image-caption {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            padding: 2rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-container:hover .image-caption {
+            opacity: 1;
+        }
+        
+        .caption-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* First container title - Neon Red */
+        .image-container:first-child .caption-title {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+        
+        /* Second container title - Neon Blue */
+        .image-container:nth-child(2) .caption-title {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .caption-text {
+            font-size: 1.1rem;
+            color: #ddd;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .neon-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            border: none;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .image-container:hover .neon-btn {
+            opacity: 1;
+        }
+        
+        /* First container button - Neon Red */
+        .image-container:first-child .neon-btn {
+            background-color: var(--darker-bg);
+            color: var(--neon-red);
+            border: 2px solid var(--neon-red);
+            box-shadow: 0 0 10px var(--neon-red), inset 0 0 5px var(--neon-red);
+        }
+        
+        .image-container:first-child .neon-btn:hover {
+            background-color: rgba(255, 7, 58, 0.2);
+            box-shadow: 0 0 20px var(--neon-red), inset 0 0 10px var(--neon-red);
+            transform: translateX(-50%) translateY(-3px);
+        }
+        
+        /* Second container button - Neon Blue */
+        .image-container:nth-child(2) .neon-btn {
+            background-color: var(--darker-bg);
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue);
+        }
+        
+        .image-container:nth-child(2) .neon-btn:hover {
+            background-color: rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+            transform: translateX(-50%) translateY(-3px);
+        }
+        
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background-color: var(--darker-bg);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue), inset 0 0 15px var(--neon-blue);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 60%;
+            max-width: 800px;
+            transform: scale(0.5);
+            animation: popupBounce 0.6s forwards;
+            position: relative;
+        }
+        
+        @keyframes popupBounce {
+            0% { transform: scale(0.5); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        
+        .popup-message {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-blue);
+            line-height: 1.3;
+        }
+        
+        .close-popup {
+            background-color: var(--darker-bg);
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .close-popup:hover {
+            background-color: rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .containers-wrapper {
+                flex-direction: column;
+                align-items: center;
+                width: 90vw;
+                gap: 1.5rem;
+            }
+            
+            .image-container {
+                width: 70vw;
+                height: 40vh;
+            }
+            
+            .home-btn {
+                top: 20px;
+                left: 20px;
+                padding: 8px 20px;
+            }
+            
+            .caption-title {
+                font-size: 1.4rem;
+            }
+            
+            .caption-text {
+                font-size: 1rem;
+            }
+            
+            .neon-btn {
+                padding: 8px 20px;
+                font-size: 0.8rem;
+            }
+            
+            .popup-content {
+                width: 80%;
+                padding: 1.5rem;
+            }
+            
+            .popup-message {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+            }
+            
+            .image-container {
+                width: 85vw;
+                height: 35vh;
+            }
+            
+            .image-caption {
+                padding: 1rem;
+            }
+            
+            .caption-title {
+                font-size: 1.2rem;
+            }
+            
+            .neon-btn {
+                padding: 6px 15px;
+                font-size: 0.7rem;
+            }
+            
+            .popup-content {
+                width: 90%;
+                padding: 1rem;
+            }
+            
+            .popup-message {
+                font-size: 1.4rem;
+            }
+            
+            .close-popup {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-btn">Home</a>
+    
+    <h1 class="page-title">This is my design</h1>
+    
+    <div class="containers-wrapper">
+        <div class="image-container">
+            <img src="images/redpill.png" alt="About Me">
+            <div class="image-caption">
+                <h2 class="caption-title">CREATIVE PROFESSIONAL</h2>
+                <p class="caption-text">Innovative designer specializing in immersive digital experiences with a focus on user-centered solutions and cutting-edge aesthetics. I like to push boundaries of creativity, because that to me is ART and the */root of my passion is Design</p>
+            </div>
+            <a href="ecommerce.html" class="neon-btn">WEBSITE DESIGN</a>
+        </div>
+        
+        <div class="image-container">
+            <img src="images/bluepill.png" alt="My Work">
+            <div class="image-caption">
+                <h2 class="caption-title">TECHNICAL EXPERT</h2>
+                <p class="caption-text">Skilled developer creating robust, scalable solutions with modern technologies and efficient workflows for optimal performance. No full stack developer would be complete with out the drive to make things work. From start to finnish my team can craft a SECURE, SCALABLE and USER Friendly Web application for your project idea.</p>
+            </div>
+            <button class="neon-btn" id="popupBtn">EMPTY PROJECT</button>
+        </div>
+    </div>
+    
+    <!-- Popup HTML -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <p class="popup-message">This site is still under construction</p>
+            <button class="close-popup" id="closePopup">CLOSE</button>
+        </div>
+    </div>
+    
+    <script>
+        // Popup functionality
+        const popupBtn = document.getElementById('popupBtn');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const closePopup = document.getElementById('closePopup');
+        
+        popupBtn.addEventListener('click', function() {
+            popupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+        });
+        
+        closePopup.addEventListener('click', function() {
+            popupOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+        
+        // Close popup when clicking outside the content
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+                popupOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

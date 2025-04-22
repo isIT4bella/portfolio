@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Gallery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+        
+        :root {
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff00aa;
+            --neon-orange: #ff8c42;
+            --neon-blue: #00f3ff;
+            --neon-red: #ff073a;
+            --neon-green: #00ff88;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(188, 19, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 94, 26, 0.1) 0%, transparent 50%);
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .home-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: var(--darker-bg);
+            color: var(--neon-purple);
+            border: 2px solid var(--neon-purple);
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 10;
+            border-radius: 4px;
+        }
+        
+        .home-btn:hover {
+            color: var(--neon-orange);
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px var(--neon-orange);
+            transform: translateY(-3px);
+        }
+        
+        .gallery-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            width: 90%;
+            max-width: 1200px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background-color: var(--darker-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+        }
+        
+        /* Individual item hover colors */
+        .gallery-item:nth-child(1):hover {
+            border-color: var(--neon-red);
+            box-shadow: 0 0 20px var(--neon-red), inset 0 0 10px var(--neon-red);
+        }
+        
+        .gallery-item:nth-child(2):hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+        }
+        
+        .gallery-item:nth-child(3):hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green), inset 0 0 10px var(--neon-green);
+        }
+        
+        .gallery-item:nth-child(4):hover {
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px var(--neon-orange);
+        }
+        
+        .gallery-item img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            opacity: 0.9;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            background-color: black;
+        }
+        
+        .gallery-item:hover img {
+            opacity: 1; /* Changed from 0.7 to 1 for full visibility */
+            transform: scale(1.05);
+        }
+        
+        .item-caption {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            padding: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+            backdrop-filter: blur(5px); /* Slight blur effect */
+            border-radius: 4px;
+            margin: 0 1rem;
+        }
+        
+        .gallery-item:hover .item-caption {
+            opacity: 1;
+        }
+        
+        .caption-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Individual caption colors */
+        .gallery-item:nth-child(1) .caption-title {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+        
+        .gallery-item:nth-child(2) .caption-title {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .gallery-item:nth-child(3) .caption-title {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        .gallery-item:nth-child(4) .caption-title {
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--neon-orange);
+        }
+        
+        .caption-text {
+            font-size: 1rem;
+            color: #ddd;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                width: 80%;
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .home-btn {
+                top: 20px;
+                left: 20px;
+                padding: 8px 20px;
+            }
+            
+            .item-caption {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                width: 95%;
+            }
+            
+            .gallery-item {
+                height: 200px;
+            }
+            
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+            
+            .caption-title {
+                font-size: 1.2rem;
+            }
+            
+            .caption-text {
+                font-size: 0.9rem;
+            }
+            
+            .item-caption {
+                padding: 0.8rem;
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-btn">Home</a>
+    
+    <h1 class="gallery-title">GALLERY</h1>
+    
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="" alt="  ">
+            <div class="item-caption">
+                <h2 class="caption-title">CREATIVE DESIGN</h2>
+                <p class="caption-text">My design systems prioritize user-centric interfaces that enhance the overall experience. Using Canva and Figma, I create visually appealing prototypes aligned with brand identity. Proficient in HTML, CSS, and JavaScript, I implement responsive designs for seamless functionality across devices. My experience with hosting platforms like WordPress and Wix allows for efficient deployment and management of web projects</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="" alt="  ">
+            <div class="item-caption">
+                <h2 class="caption-title">A.INTEGRATION TECHNICIAN</h2>
+                <p class="caption-text">AI stands as the most advanced and transformative tool in a developer's arsenal, paralleling the revolutionary impact of the paintbrush on artistic expression. It enables developers to automate intricate processes, augment creative potential, and tackle complex challenges with unparalleled efficiency. </p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="" alt="  ">
+            <div class="item-caption">
+                <h2 class="caption-title">AWS ClOUD ARCHITECTURE</h2>
+                <p class="caption-text">My proficiency in AWS services, such as EC2, S3, RDS, and Lambda. By optimizing performance I leverage best practices in cloud security, compliance, and automation using tools like CloudFormation and AWS IAM. Additionally, my ability to analyze workloads and implement cloud migration strategies ensures a seamless transition to the cloud </p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="" alt="  ">
+            <div class="item-caption">
+                <h2 class="caption-title">INTERACTIVE MEDIA</h2>
+                <p class="caption-text">
+                    I’m a creative visionary who turns concepts into eye-catching designs that resonate with users. My work challenges conventional boundaries, merging innovation with narrative to craft unforgettable experiences. By prioritizing user interaction, I ensure each design captivates attention and builds a lasting connection with the brand. This distinctive approach makes me a valuable asset to your team.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
